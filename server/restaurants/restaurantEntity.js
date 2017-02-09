@@ -56,7 +56,6 @@ const schema = new mongoose.Schema({
 		required : true
 	}
 });
-const model = mongoose.model('restaurant', schema);
-module.exports = {
-	userModel: model
-};
+const restaurants = mongoose.model('restaurants', schema);
+
+module.exports = restaurants;

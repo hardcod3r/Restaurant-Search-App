@@ -1,41 +1,62 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-var ParentComponent = require('./components/sample/index.jsx');
+var ChildComponent = require('./components/restaurant/index.jsx');
+
 class MainComponent extends React.Component {
-	constructor(props) {
-			super(props);
+    constructor() {
+        super();
+				this.state = {result:[]};
+    }
 
-			this.state = {
-			name: 'soundar'
-	 }
-
-}
-change()
-{
-	var s = this.refs.name.value;
-	this.setState({
-
-		name: s});
-}
-    render () {
+		getRestaurantCityFromZomato(city, Cuisine)
+    {
+        $.ajax({
+            url: "https://developers.zomato.com/api/v2.1/locations?query=" + city,
+            type: 'GET',
+            beforeSend: function(request) {
+                request.setRequestHeader("user-key", "2f03afa715b5c97179b12454e9e9f4e7");
+            },
+            success: function(data) {
+                console.log('Successfully got JSON from Zomato' + JSON.stringify(data));
+								// this.setState({result : data.restaurants}).bind(this);
+								this.getRestaurantDataFromZomato(data.location_suggestions[0].city_id,Cuisine)
+            }.bind(this),
+            error: function(err) {
+                console.log('error occurred on AJAX');
+                console.log(err);
+            }.bind(this)
+        });
+    }
+    getRestaurantDataFromZomato(id, cus)
+    {
+        $.ajax({
+            url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + id + "&entity_type=city&q=" + cus + "&count=10&apikey=2f03afa715b5c97179b12454e9e9f4e7",
+            type: 'GET',
+            beforeSend: function(request) {
+                request.setRequestHeader("user-key", "2f03afa715b5c97179b12454e9e9f4e7");
+            },
+            success: function(data) {
+                console.log('Successfully got JSON from Zomato' + JSON.stringify(data));
+								this.setState({result : data.restaurants}).bind(this);
+            }.bind(this),
+            error: function(err) {
+                console.log('error occurred on AJAX');
+                console.log(err);
+            }.bind(this)
+        });
+    }
+		render() {
         return (
             <div>
-                <h1>Hello From React by {this.state.name}</h1>
-								  <input type="text" ref="name"/>
-								<button onClick = {this.change.bind(this)}>parent click</button>
-
-
-
-
-
-                <ParentComponent.Component1.Component1 name={this.state.name} />
-								<ParentComponent.Component2.Component2  />
-								 <ParentComponent.Component1.grandchild.grandchild/>
-
+                <ChildComponent.Child1 handle={this.getRestaurantCityFromZomato.bind(this)}/>
+								<ChildComponent.Child2 handle2={this.state.result}/>
             </div>
         );
     }
+
+
+
+
 }
 ReactDOM.render(
-    <MainComponent/>,document.getElementById('mountapp')
-);
+    <MainComponent/>, document.getElementById('mountapp'));
