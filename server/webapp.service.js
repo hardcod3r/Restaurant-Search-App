@@ -14,15 +14,13 @@ module.exports = function() {
 
   app = service.setupWebpack(app);
 
- app = service.setupStaticRoutes(app);
+  app = service.setupStaticRoutes(app);
 
   app = service.setupMiddlewares(app);
 
   app = service.setupRestRoutes(app);
 
   app = service.setupRestRoutes(app);
-
-
 
   return app;
 };

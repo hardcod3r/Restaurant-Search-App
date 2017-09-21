@@ -12,7 +12,7 @@ render:function()
     					Home
     				</h2>
     				<p>
-    					This is Gmail Box. It is using gmail API to extract your emails.
+    					Welcome to our app
     				</p>
     				<p>
     					<a className="btn btn-primary btn-large" href="./clientapp.jsx">Learn more</a>

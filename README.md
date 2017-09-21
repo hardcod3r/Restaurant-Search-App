@@ -1,17 +1,8 @@
-# Zynla
-Relevance through collaborative search
+# Restaurant Search App
+This is a Restaurant Search App. This app basically performs a CRUD operation. Using Zomato API we fetch the restaurant details and display it. You can add the comments to particular restaurant and also save your favourite restaurants.
 
-Zynla is a collaborative search engine, so that you can search as a team to access relevant documents
 
-## Supports
-
-- Webpack
-- Material UI
-- Hot Module replacement
-- React Hotloading (persists state)
-- Recommended folder structure for a react.js webapp project
-
-### How to start running
+## How to start running
 Run these commands
 
 To install the required dependencies
@@ -20,8 +11,8 @@ To install the required dependencies
 
 To build the app
 
-	$ npm run build
+	$ npm run gbuild
 
 To run the app
 
-	$ npm run serve
+	$ npm start

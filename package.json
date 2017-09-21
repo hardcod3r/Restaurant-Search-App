@@ -1,5 +1,5 @@
 {
-  "name": "Zynla",
+  "name": "Restaurant Search App",
   "version": "1.0.0",
   "scripts": {
     "test": "mocha",
@@ -8,25 +8,7 @@
     "clean": "gulp clean",
     "start": "nodemon bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/stackroute/oxygen.git"
-  },
-  "keywords": [
-    "zynla",
-    "search",
-    "collaborative search",
-    "semantic",
-    "graph",
-    "nodejs"
-  ],
-  "author": "StackRoute",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/stackroute/oxygen/issues"
-  },
-  "homepage": "https://github.com/stackroute/oxygen#readme",
-  "dependencies": {
+    "dependencies": {
     "amqplib": "^0.5.1",
     "array-flatten": "^2.1.1",
     "async": "^2.1.4",

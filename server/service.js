@@ -23,20 +23,15 @@ function setupRestRoutes(app) {
   //  MOUNT YOUR REST ROUTE HERE
   //  Eg:
 
-
   app.use(function(req, res) {
     let err = new Error('Resource not found');
     err.status = 404;
-    return res.status(err.status).json({
-      error: err.message
-    });
+    return res.status(err.status).json({error: err.message});
   });
 
   app.use(function(err, req, res) {
     logger.error('Internal error in watch processor: ', err);
-    return res.status(err.status || 500).json({
-      error: err.message
-    });
+    return res.status(err.status || 500).json({error: err.message});
   });
 
   return app;
@@ -47,19 +42,15 @@ function setupMiddlewares(app) {
   app.use(morgan('dev'));
   const bodyParser = require('body-parser');
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({
-    extended: false
-  }));
+  app.use(bodyParser.urlencoded({extended: false}));
 
   const compression = require('compression');
   app.use(compression());
 
-  app.use(function(req,res,next)
-  {
-    res.header('Access-Control-Allow-Origin',"*");
-    res.header('Access-Control-Allow-Method','GET,POST,PUT,DELETE');
-    res.header('Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Method', 'GET,POST,PUT,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     next();
   });
 
@@ -77,16 +68,16 @@ function setupWebpack(app) {
 
     app.use(webpackHotMiddleware(webpackCompiler));
     app.use(webpackDevMiddleware(webpackCompiler, {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath,
-  stats: {
-      colors: true
-  },
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000
-  }
-}));
+      noInfo: true,
+      publicPath: webpackConfig.output.publicPath,
+      stats: {
+        colors: true
+      },
+      watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
+      }
+    }));
     // app.use(webpackDevMiddleware(webpackCompiler, {
     //   noInfo: true,
     //   publicPath: webpackConfig.output.publicPath
@@ -112,9 +103,7 @@ function setupMongooseConnections() {
 
   process.on('SIGINT', function() {
     mongoose.connection.close(function() {
-      logger.info(
-        'Mongoose disconnected on process termination'
-        );
+      logger.info('Mongoose disconnected on process termination');
       process.exit(0);
     });
   });

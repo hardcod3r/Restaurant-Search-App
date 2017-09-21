@@ -6,23 +6,21 @@ var NavBar = require('./components/NavBar');
 var About = require('./components/About');
 var Home = require('./components/clientapp.jsx');
 
-
 var MainComp = React.createClass({
-  render:function(){
-    return(
+  render: function() {
+    return (
       <div>
-      <NavBar/>
-      <br/><br/><br/><br/>
-        {this.props.children}
+        <NavBar/>
+        <br/><br/><br/><br/> {this.props.children}
       </div>
     );
   }
 })
 ReactDOM.render(
   <Router history={browserHistory}>
-                <Route path="/" component={MainComp}>
-                <IndexRoute component={Home}/>
-                <Route path="/about" component={About}/>
-                <Route path="/gmailbox" component={GmailBox}/>
-              </Route>
-  </Router>,document.getElementById('mountapp'));
+  <Route path="/" component={MainComp}>
+    <IndexRoute component={Home}/>
+    <Route path="/about" component={About}/>
+    <Route path="/gmailbox" component={GmailBox}/>
+  </Route>
+</Router>, document.getElementById('mountapp'));
